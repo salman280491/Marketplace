@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MarketPlaceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CheckIn">
+          <Key>
+            <PropertyRef Name="CheckInID" />
+          </Key>
+          <Property Name="CheckInID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TraderID" Type="int" Nullable="false" />
+          <Property Name="FarmerName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="VehicalNumber" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="GoodsDestination" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="GoodsID" Type="int" Nullable="false" />
+          <Property Name="Begs" Type="bigint" Nullable="false" />
+          <Property Name="Weight" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="DriverName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CheckInBy" Type="int" Nullable="false" />
+          <Property Name="CheckInDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GoodsMaster">
+          <Key>
+            <PropertyRef Name="GoodsID" />
+          </Key>
+          <Property Name="GoodsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsTypeID" Type="int" Nullable="false" />
+          <Property Name="GoodsName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="Createdby" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="GoodsTypeMaster">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TypeDiscription" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TraderMaster">
+          <Key>
+            <PropertyRef Name="TraderID" />
+          </Key>
+          <Property Name="TraderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TraderCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TraderName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TraderRegisterNo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TraderCommission" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="int" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserFirstName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="UserLastName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="RoleTypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CheckIn_GoodsMaster">
+          <End Role="GoodsMaster" Type="Self.GoodsMaster" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsMaster">
+              <PropertyRef Name="GoodsID" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="GoodsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_TraderMaster">
+          <End Role="TraderMaster" Type="Self.TraderMaster" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TraderMaster">
+              <PropertyRef Name="TraderID" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="TraderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="CheckIn" Type="Self.CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="CheckInBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsMaster_GoodsTypeMaster">
+          <End Role="GoodsTypeMaster" Type="Self.GoodsTypeMaster" Multiplicity="1" />
+          <End Role="GoodsMaster" Type="Self.GoodsMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsTypeMaster">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="GoodsMaster">
+              <PropertyRef Name="GoodsTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="GoodsMaster" Type="Self.GoodsMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="GoodsMaster">
+              <PropertyRef Name="Createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsTypeMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="GoodsTypeMaster" Type="Self.GoodsTypeMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="GoodsTypeMaster">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TraderMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="TraderMaster" Type="Self.TraderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TraderMaster">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_RoleMaster">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MarketPlaceDBModelStoreContainer">
+          <EntitySet Name="CheckIn" EntityType="Self.CheckIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodsMaster" EntityType="Self.GoodsMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GoodsTypeMaster" EntityType="Self.GoodsTypeMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TraderMaster" EntityType="Self.TraderMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CheckIn_GoodsMaster" Association="Self.FK_CheckIn_GoodsMaster">
+            <End Role="GoodsMaster" EntitySet="GoodsMaster" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_TraderMaster" Association="Self.FK_CheckIn_TraderMaster">
+            <End Role="TraderMaster" EntitySet="TraderMaster" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_UserMaster" Association="Self.FK_CheckIn_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="CheckIn" EntitySet="CheckIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsMaster_GoodsTypeMaster" Association="Self.FK_GoodsMaster_GoodsTypeMaster">
+            <End Role="GoodsTypeMaster" EntitySet="GoodsTypeMaster" />
+            <End Role="GoodsMaster" EntitySet="GoodsMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsMaster_UserMaster" Association="Self.FK_GoodsMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="GoodsMaster" EntitySet="GoodsMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsTypeMaster_UserMaster" Association="Self.FK_GoodsTypeMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="GoodsTypeMaster" EntitySet="GoodsTypeMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TraderMaster_UserMaster" Association="Self.FK_TraderMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMaster" />
+            <End Role="TraderMaster" EntitySet="TraderMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_RoleMaster" Association="Self.FK_UserMaster_RoleMaster">
+            <End Role="RoleMaster" EntitySet="RoleMaster" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MarketPlaceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GoodsMaster">
+          <Key>
+            <PropertyRef Name="GoodsID" />
+          </Key>
+          <Property Name="GoodsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsTypeID" Type="Int32" Nullable="false" />
+          <Property Name="GoodsName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Createdby" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <NavigationProperty Name="GoodsTypeMaster" Relationship="Self.FK_GoodsMaster_GoodsTypeMaster" FromRole="GoodsMaster" ToRole="GoodsTypeMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_GoodsMaster_UserMaster" FromRole="GoodsMaster" ToRole="UserMaster" />
+          <NavigationProperty Name="CheckIns" Relationship="MarketPlaceDBModel.FK_CheckIn_GoodsMaster" FromRole="GoodsMaster" ToRole="CheckIn" />
+        </EntityType>
+        <EntityType Name="GoodsTypeMaster">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeDiscription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GoodsMasters" Relationship="Self.FK_GoodsMaster_GoodsTypeMaster" FromRole="GoodsTypeMaster" ToRole="GoodsMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_GoodsTypeMaster_UserMaster" FromRole="GoodsTypeMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_RoleMaster" FromRole="RoleMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="TraderMaster">
+          <Key>
+            <PropertyRef Name="TraderID" />
+          </Key>
+          <Property Name="TraderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TraderCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TraderName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TraderRegisterNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TraderCommission" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserMaster" Relationship="Self.FK_TraderMaster_UserMaster" FromRole="TraderMaster" ToRole="UserMaster" />
+          <NavigationProperty Name="CheckIns" Relationship="MarketPlaceDBModel.FK_CheckIn_TraderMaster" FromRole="TraderMaster" ToRole="CheckIn" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFirstName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserLastName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GoodsMasters" Relationship="Self.FK_GoodsMaster_UserMaster" FromRole="UserMaster" ToRole="GoodsMaster" />
+          <NavigationProperty Name="GoodsTypeMasters" Relationship="Self.FK_GoodsTypeMaster_UserMaster" FromRole="UserMaster" ToRole="GoodsTypeMaster" />
+          <NavigationProperty Name="RoleMaster" Relationship="Self.FK_UserMaster_RoleMaster" FromRole="UserMaster" ToRole="RoleMaster" />
+          <NavigationProperty Name="TraderMasters" Relationship="Self.FK_TraderMaster_UserMaster" FromRole="UserMaster" ToRole="TraderMaster" />
+          <NavigationProperty Name="CheckIns" Relationship="MarketPlaceDBModel.FK_CheckIn_UserMaster" FromRole="UserMaster" ToRole="CheckIn" />
+        </EntityType>
+        <Association Name="FK_GoodsMaster_GoodsTypeMaster">
+          <End Role="GoodsTypeMaster" Type="Self.GoodsTypeMaster" Multiplicity="1" />
+          <End Role="GoodsMaster" Type="Self.GoodsMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsTypeMaster">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="GoodsMaster">
+              <PropertyRef Name="GoodsTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="GoodsMaster" Type="Self.GoodsMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="GoodsMaster">
+              <PropertyRef Name="Createdby" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsTypeMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="GoodsTypeMaster" Type="Self.GoodsTypeMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="GoodsTypeMaster">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_RoleMaster">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TraderMaster_UserMaster">
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="1" />
+          <End Role="TraderMaster" Type="Self.TraderMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="TraderMaster">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MarketPlaceDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GoodsMasters" EntityType="Self.GoodsMaster" />
+          <EntitySet Name="GoodsTypeMasters" EntityType="Self.GoodsTypeMaster" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMaster" />
+          <EntitySet Name="TraderMasters" EntityType="Self.TraderMaster" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+          <AssociationSet Name="FK_GoodsMaster_GoodsTypeMaster" Association="Self.FK_GoodsMaster_GoodsTypeMaster">
+            <End Role="GoodsTypeMaster" EntitySet="GoodsTypeMasters" />
+            <End Role="GoodsMaster" EntitySet="GoodsMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsMaster_UserMaster" Association="Self.FK_GoodsMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="GoodsMaster" EntitySet="GoodsMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsTypeMaster_UserMaster" Association="Self.FK_GoodsTypeMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="GoodsTypeMaster" EntitySet="GoodsTypeMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_RoleMaster" Association="Self.FK_UserMaster_RoleMaster">
+            <End Role="RoleMaster" EntitySet="RoleMasters" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TraderMaster_UserMaster" Association="Self.FK_TraderMaster_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="TraderMaster" EntitySet="TraderMasters" />
+          </AssociationSet>
+          <EntitySet Name="CheckIns" EntityType="MarketPlaceDBModel.CheckIn" />
+          <AssociationSet Name="FK_CheckIn_GoodsMaster" Association="MarketPlaceDBModel.FK_CheckIn_GoodsMaster">
+            <End Role="GoodsMaster" EntitySet="GoodsMasters" />
+            <End Role="CheckIn" EntitySet="CheckIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_TraderMaster" Association="MarketPlaceDBModel.FK_CheckIn_TraderMaster">
+            <End Role="TraderMaster" EntitySet="TraderMasters" />
+            <End Role="CheckIn" EntitySet="CheckIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CheckIn_UserMaster" Association="MarketPlaceDBModel.FK_CheckIn_UserMaster">
+            <End Role="UserMaster" EntitySet="UserMasters" />
+            <End Role="CheckIn" EntitySet="CheckIns" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CheckIn">
+          <Key>
+            <PropertyRef Name="CheckInID" />
+          </Key>
+          <Property Name="CheckInID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TraderID" Type="Int32" Nullable="false" />
+          <Property Name="FarmerName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VehicalNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GoodsDestination" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GoodsID" Type="Int32" Nullable="false" />
+          <Property Name="Begs" Type="Int64" Nullable="false" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="DriverName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CheckInBy" Type="Int32" Nullable="false" />
+          <Property Name="CheckInDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateBy" Type="Int32" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GoodsMaster" Relationship="MarketPlaceDBModel.FK_CheckIn_GoodsMaster" FromRole="CheckIn" ToRole="GoodsMaster" />
+          <NavigationProperty Name="TraderMaster" Relationship="MarketPlaceDBModel.FK_CheckIn_TraderMaster" FromRole="CheckIn" ToRole="TraderMaster" />
+          <NavigationProperty Name="UserMaster" Relationship="MarketPlaceDBModel.FK_CheckIn_UserMaster" FromRole="CheckIn" ToRole="UserMaster" />
+        </EntityType>
+        <Association Name="FK_CheckIn_GoodsMaster">
+          <End Type="MarketPlaceDBModel.GoodsMaster" Role="GoodsMaster" Multiplicity="1" />
+          <End Type="MarketPlaceDBModel.CheckIn" Role="CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GoodsMaster">
+              <PropertyRef Name="GoodsID" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="GoodsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_TraderMaster">
+          <End Type="MarketPlaceDBModel.TraderMaster" Role="TraderMaster" Multiplicity="1" />
+          <End Type="MarketPlaceDBModel.CheckIn" Role="CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TraderMaster">
+              <PropertyRef Name="TraderID" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="TraderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CheckIn_UserMaster">
+          <End Type="MarketPlaceDBModel.UserMaster" Role="UserMaster" Multiplicity="1" />
+          <End Type="MarketPlaceDBModel.CheckIn" Role="CheckIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserMaster">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CheckIn">
+              <PropertyRef Name="CheckInBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MarketPlaceDBModelStoreContainer" CdmEntityContainer="MarketPlaceDBEntities1">
+          <EntitySetMapping Name="GoodsMasters">
+            <EntityTypeMapping TypeName="MarketPlaceDBModel.GoodsMaster">
+              <MappingFragment StoreEntitySet="GoodsMaster">
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="GoodsTypeID" ColumnName="GoodsTypeID" />
+                <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoodsTypeMasters">
+            <EntityTypeMapping TypeName="MarketPlaceDBModel.GoodsTypeMaster">
+              <MappingFragment StoreEntitySet="GoodsTypeMaster">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeDiscription" ColumnName="TypeDiscription" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="MarketPlaceDBModel.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMaster">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TraderMasters">
+            <EntityTypeMapping TypeName="MarketPlaceDBModel.TraderMaster">
+              <MappingFragment StoreEntitySet="TraderMaster">
+                <ScalarProperty Name="TraderID" ColumnName="TraderID" />
+                <ScalarProperty Name="TraderCode" ColumnName="TraderCode" />
+                <ScalarProperty Name="TraderName" ColumnName="TraderName" />
+                <ScalarProperty Name="TraderRegisterNo" ColumnName="TraderRegisterNo" />
+                <ScalarProperty Name="TraderCommission" ColumnName="TraderCommission" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="MarketPlaceDBModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+                <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+                <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckIns">
+            <EntityTypeMapping TypeName="MarketPlaceDBModel.CheckIn">
+              <MappingFragment StoreEntitySet="CheckIn">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+                <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Begs" ColumnName="Begs" />
+                <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+                <ScalarProperty Name="GoodsDestination" ColumnName="GoodsDestination" />
+                <ScalarProperty Name="VehicalNumber" ColumnName="VehicalNumber" />
+                <ScalarProperty Name="FarmerName" ColumnName="FarmerName" />
+                <ScalarProperty Name="TraderID" ColumnName="TraderID" />
+                <ScalarProperty Name="CheckInID" ColumnName="CheckInID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

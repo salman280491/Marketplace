@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MarketPlaceDBModelStoreContainer" CdmEntityContainer="MarketPlaceDBEntities1">
+    <EntitySetMapping Name="GoodsMasters">
+      <EntityTypeMapping TypeName="MarketPlaceDBModel.GoodsMaster">
+        <MappingFragment StoreEntitySet="GoodsMaster">
+          <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+          <ScalarProperty Name="GoodsTypeID" ColumnName="GoodsTypeID" />
+          <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GoodsTypeMasters">
+      <EntityTypeMapping TypeName="MarketPlaceDBModel.GoodsTypeMaster">
+        <MappingFragment StoreEntitySet="GoodsTypeMaster">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="TypeDiscription" ColumnName="TypeDiscription" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleMasters">
+      <EntityTypeMapping TypeName="MarketPlaceDBModel.RoleMaster">
+        <MappingFragment StoreEntitySet="RoleMaster">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TraderMasters">
+      <EntityTypeMapping TypeName="MarketPlaceDBModel.TraderMaster">
+        <MappingFragment StoreEntitySet="TraderMaster">
+          <ScalarProperty Name="TraderID" ColumnName="TraderID" />
+          <ScalarProperty Name="TraderCode" ColumnName="TraderCode" />
+          <ScalarProperty Name="TraderName" ColumnName="TraderName" />
+          <ScalarProperty Name="TraderRegisterNo" ColumnName="TraderRegisterNo" />
+          <ScalarProperty Name="TraderCommission" ColumnName="TraderCommission" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="MarketPlaceDBModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserFirstName" ColumnName="UserFirstName" />
+          <ScalarProperty Name="UserLastName" ColumnName="UserLastName" />
+          <ScalarProperty Name="RoleTypeID" ColumnName="RoleTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CheckIns">
+      <EntityTypeMapping TypeName="MarketPlaceDBModel.CheckIn">
+        <MappingFragment StoreEntitySet="CheckIn">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Begs" ColumnName="Begs" />
+          <ScalarProperty Name="GoodsID" ColumnName="GoodsID" />
+          <ScalarProperty Name="GoodsDestination" ColumnName="GoodsDestination" />
+          <ScalarProperty Name="VehicalNumber" ColumnName="VehicalNumber" />
+          <ScalarProperty Name="FarmerName" ColumnName="FarmerName" />
+          <ScalarProperty Name="TraderID" ColumnName="TraderID" />
+          <ScalarProperty Name="CheckInID" ColumnName="CheckInID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

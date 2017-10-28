@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MarketPlace.CheckIn>
+
+@{
+    ViewBag.Title = "CheckInList";
+}
+
+<h2>CheckInList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.FarmerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VehicalNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GoodsDestination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Begs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheckInDate)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.GoodsMaster.GoodsName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TraderMaster.TraderCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserMaster.UserFirstName)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FarmerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VehicalNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GoodsDestination)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Begs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckInDate)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.GoodsMaster.GoodsName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TraderMaster.TraderCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserMaster.UserFirstName)
+        </td>
+       @* <td>
+        @Html.ActionLink("Edit", "Edit", new { id=item.CheckInID }) |
+        @Html.ActionLink("Details", "Details", new { id=item.CheckInID }) |
+        @Html.ActionLink("Delete", "Delete", new { id=item.CheckInID })
+    </td>*@
+    </tr>
+}
+
+</table>

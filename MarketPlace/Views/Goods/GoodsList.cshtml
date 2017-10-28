@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MarketPlace.GoodsMaster>
+
+@{
+    ViewBag.Title = "GoodsList";
+}
+
+<h2>GoodsList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GoodsName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GoodsTypeMaster.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserMaster.UserFirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GoodsName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GoodsTypeMaster.TypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserMaster.UserFirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditGoods", new { id=item.GoodsID }) 
+        </td>
+    </tr>
+}
+
+</table>

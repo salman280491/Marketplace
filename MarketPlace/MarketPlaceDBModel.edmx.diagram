@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aa44e4e2659b49e09b8fe6d0fbfcc764" Name="Diagram1">
+        <EntityTypeShape EntityType="MarketPlaceDBModel.GoodsMaster" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketPlaceDBModel.RoleMaster" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketPlaceDBModel.TraderMaster" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MarketPlaceDBModel.UserMaster" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="MarketPlaceDBModel.FK_UserMaster_RoleMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="MarketPlaceDBModel.FK_GoodsMaster_UserMaster" />
+        <AssociationConnector Association="MarketPlaceDBModel.FK_TraderMaster_UserMaster" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
