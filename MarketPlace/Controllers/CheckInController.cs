@@ -9,6 +9,7 @@ namespace MarketPlace.Controllers
     public class CheckInController : Controller
     {
 
+
         MarketPlaceDBEntities1 db = new MarketPlaceDBEntities1();
         // GET: CheckIn
         public ActionResult CheckInList()
